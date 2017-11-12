@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:WordPressXF.Converters;assembly=WordPressXF"
+             x:Class="WordPressXF.Views.CommentPage"
+             Title="Comments">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:HtmlConverter x:Key="HtmlConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <ListView ItemsSource="{Binding Comments}"
+                  HasUnevenRows="True"
+                  IsPullToRefreshEnabled="False">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame BackgroundColor="White" Margin="10,5">
+                            <Grid Margin="6">
+                                <Label Text="{Binding Content.Rendered, Converter={StaticResource HtmlConverter}}" />
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>
