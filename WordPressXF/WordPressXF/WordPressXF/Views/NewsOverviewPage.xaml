@@ -21,7 +21,7 @@
 
     <ContentPage.Content>
         <Grid>
-            
+
             <controls:IncrementalListView ItemsSource="{Binding Posts}"
                                       HasUnevenRows="True"
                                       IsPullToRefreshEnabled="True"                  
@@ -30,6 +30,11 @@
                 <controls:IncrementalListView.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="ItemSelected" Command="{Binding SelectPostCommand}" Converter="{StaticResource SelectedItemConverter}" />
                 </controls:IncrementalListView.Behaviors>
+                <controls:IncrementalListView.SeparatorColor>
+                    <OnPlatform x:TypeArguments="Color">
+                        <On Platform="iOS" Value="Transparent"/>
+                    </OnPlatform>
+                </controls:IncrementalListView.SeparatorColor>
                 <controls:IncrementalListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -50,7 +55,7 @@
                                     </forms:CachedImage>
 
                                     <Label Text="{Binding Title.Rendered, Converter={StaticResource HtmlConverter}}"
-                                       FontSize="Large" FontAttributes="Bold" Grid.Row="1" />
+                                       FontSize="Medium" FontAttributes="Bold" Grid.Row="1" />
 
                                 </Grid>
                             </Frame>
@@ -58,16 +63,16 @@
                     </DataTemplate>
                 </controls:IncrementalListView.ItemTemplate>
             </controls:IncrementalListView>
-            
+
             <Label Text="Currently there are no posts to display. Please use 'Pull-To-Refresh' to get the latest news."
-                   IsVisible="{Binding Posts, Converter={StaticResource NullOrEmptyListToIsVisibleConverter}, Mode=OneWay}"
+                   IsVisible="{Binding ArePostsNotAvailable}"
                    VerticalTextAlignment="Center"
                    HorizontalTextAlignment="Center"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
                    Margin="12"
                    FontAttributes="Italic"/>
-            
+
         </Grid>
     </ContentPage.Content>
 
