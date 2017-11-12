@@ -10,6 +10,9 @@ namespace WordPressXF.Views
         public NewsDetailPage()
         {
             InitializeComponent();
+
+            if (Device.RuntimePlatform == Device.iOS)
+                Icon = new FileImageSource { File = "post.png" };
         }
 
         private void WebViewOnNavigating(object sender, WebNavigatingEventArgs e)

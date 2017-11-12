@@ -9,6 +9,9 @@ namespace WordPressXF.Views
 		public CommentPage ()
 		{
 			InitializeComponent ();
-		}
+
+		    if (Device.RuntimePlatform == Device.iOS)
+		        Icon = new FileImageSource { File = "comments.png" };
+        }
 	}
 }
