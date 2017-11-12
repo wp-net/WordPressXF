@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -40,8 +41,34 @@ namespace WordPressXF.ViewModels
             set { _comments = value; OnPropertyChanged(); }
         }
 
+        private bool _arePostsNotAvailable = true;
+        public bool ArePostsNotAvailable
+        {
+            get => _arePostsNotAvailable;
+            set { _arePostsNotAvailable = value; OnPropertyChanged(); }
+        }
+
+
         private ICommand _loadPostsCommand;
-        public ICommand LoadPostsCommand => _loadPostsCommand ?? (_loadPostsCommand = new Command(async () => await LoadMoreItemsAsync()));
+        public ICommand LoadPostsCommand => _loadPostsCommand ?? (_loadPostsCommand = new Command(async () => await LoadPostsAsync()));
+
+        private async Task LoadPostsAsync()
+        {
+            IsLoading = true;
+
+            _currentPage = 0;
+
+            Posts.Clear();
+
+            var posts = (await _wordpressService.GetLatestPostsAsync(_currentPage, PageSize)).ToObservableCollection();
+            HasMoreItems = posts.Count == PageSize;
+
+            Posts.AddRange(posts);
+
+            ArePostsNotAvailable = !Posts.Any();
+
+            IsLoading = false;
+        }
 
         private ICommand _selectPostCommand;
         public ICommand SelectPostCommand => _selectPostCommand ?? (_selectPostCommand = new Command<Post>(SelectPost));
@@ -85,6 +112,13 @@ namespace WordPressXF.ViewModels
 
         public int PageSize { get; set; } = 10;
 
+        private bool _isIncrementalLoading;
+        public bool IsIncrementalLoading
+        {
+            get => _isIncrementalLoading;
+            set { _isIncrementalLoading = value; OnPropertyChanged(); }
+        }
+
         private bool _hasMoreItems = true;
         public bool HasMoreItems
         {
@@ -104,7 +138,7 @@ namespace WordPressXF.ViewModels
 
         private async Task LoadMoreItemsAsync()
         {
-            IsLoading = true;
+            IsLoadingIncrementally = true;
 
             _currentPage++;
 
@@ -112,9 +146,9 @@ namespace WordPressXF.ViewModels
             HasMoreItems = posts.Count == PageSize;
 
             Posts.AddRange(posts);
-            OnPropertyChanged(nameof(Posts));
+            ArePostsNotAvailable = !Posts.Any();
 
-            IsLoading = false;
+            IsLoadingIncrementally = false;
         }
 
         #endregion
