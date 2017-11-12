@@ -83,7 +83,7 @@ namespace WordPressXF.ViewModels
 
         #region ISupportIncrementalLoading members
 
-        public int PageSize { get; set; } = 5;
+        public int PageSize { get; set; } = 10;
 
         private bool _hasMoreItems = true;
         public bool HasMoreItems
@@ -112,6 +112,7 @@ namespace WordPressXF.ViewModels
             HasMoreItems = posts.Count == PageSize;
 
             Posts.AddRange(posts);
+            OnPropertyChanged(nameof(Posts));
 
             IsLoading = false;
         }
