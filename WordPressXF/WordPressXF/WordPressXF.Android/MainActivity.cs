@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using FFImageLoading.Forms.Droid;
 
 namespace WordPressXF.Droid
 {
@@ -19,6 +20,7 @@ namespace WordPressXF.Droid
 
             base.OnCreate(bundle);
 
+            CachedImageRenderer.Init();
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
         }
