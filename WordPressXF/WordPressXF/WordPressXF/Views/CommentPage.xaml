@@ -4,28 +4,50 @@
              xmlns:converters="clr-namespace:WordPressXF.Converters;assembly=WordPressXF"
              x:Class="WordPressXF.Views.CommentPage"
              Title="Comments">
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:HtmlConverter x:Key="HtmlConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding Comments}"
+        <Grid>
+            <ListView ItemsSource="{Binding Comments}"
                   HasUnevenRows="True"
                   IsPullToRefreshEnabled="False">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Frame BackgroundColor="White" Margin="10,5">
-                            <Grid Margin="6">
-                                <Label Text="{Binding Content.Rendered, Converter={StaticResource HtmlConverter}}" />
-                            </Grid>
-                        </Frame>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame BackgroundColor="White" Margin="10,5">
+                                <Grid Margin="6">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Text="{Binding Content.Rendered, Converter={StaticResource HtmlConverter}}" 
+                                           Grid.Row="0"/>
+                                    <Label Text="{Binding AuthorName}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="CenterAndExpand"
+                                           HorizontalOptions="EndAndExpand"
+                                           Grid.Row="1"/>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Label Text="Currently there are no comments for this post."
+                   IsVisible="{Binding Comments, Converter={StaticResource NullOrEmptyListToIsVisibleConverter}}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center"
+                   FontAttributes="Italic"/>
+
+        </Grid>
+
     </ContentPage.Content>
 </ContentPage>
