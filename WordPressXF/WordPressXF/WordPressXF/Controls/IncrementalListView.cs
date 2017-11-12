@@ -77,7 +77,7 @@ namespace WordPressXF.Controls
             {
                 _lastPosition = position;
 
-                if (!IsRefreshing && _incrementalLoading.HasMoreItems)
+                if (!_incrementalLoading.IsIncrementalLoading && !IsRefreshing && _incrementalLoading.HasMoreItems)
                     LoadMoreItems();
             }
         }
