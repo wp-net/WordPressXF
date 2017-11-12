@@ -20,42 +20,55 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <controls:IncrementalListView ItemsSource="{Binding Posts}"
+        <Grid>
+            
+            <controls:IncrementalListView ItemsSource="{Binding Posts}"
                                       HasUnevenRows="True"
                                       IsPullToRefreshEnabled="True"                  
                                       RefreshCommand="{Binding LoadPostsCommand}"
                                       IsRefreshing="{Binding IsLoading, Mode=OneWay}">
-            <controls:IncrementalListView.Behaviors>
-                <behaviors:EventToCommandBehavior EventName="ItemSelected" Command="{Binding SelectPostCommand}" Converter="{StaticResource SelectedItemConverter}" />
-            </controls:IncrementalListView.Behaviors>
-            <controls:IncrementalListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Frame BackgroundColor="White" Margin="10,5">
-                            <Grid Margin="6">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
+                <controls:IncrementalListView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="ItemSelected" Command="{Binding SelectPostCommand}" Converter="{StaticResource SelectedItemConverter}" />
+                </controls:IncrementalListView.Behaviors>
+                <controls:IncrementalListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame BackgroundColor="White" Margin="10,5">
+                                <Grid Margin="6">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
 
-                                <forms:CachedImage HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                    <forms:CachedImage HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                                                    HeightRequest="200"         
                                                    DownsampleToViewSize="true"
                                                    Source = "{Binding Embedded, Converter={StaticResource FeaturedImageConverter}}"
                                                    Aspect="AspectFill"
                                                    LoadingPlaceholder="{Binding ., Source={StaticResource PlaceholderImage}, Converter={StaticResource ImageResourceConverter}}"
                                                    FadeAnimationEnabled="True">
-                                </forms:CachedImage>
+                                    </forms:CachedImage>
 
-                                <Label Text="{Binding Title.Rendered, Converter={StaticResource HtmlConverter}}"
+                                    <Label Text="{Binding Title.Rendered, Converter={StaticResource HtmlConverter}}"
                                        FontSize="Large" FontAttributes="Bold" Grid.Row="1" />
 
-                            </Grid>
-                        </Frame>
-                    </ViewCell>
-                </DataTemplate>
-            </controls:IncrementalListView.ItemTemplate>
-        </controls:IncrementalListView>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </controls:IncrementalListView.ItemTemplate>
+            </controls:IncrementalListView>
+            
+            <Label Text="Currently there are no posts to display. Please use 'Pull-To-Refresh' to get the latest news."
+                   IsVisible="{Binding Posts, Converter={StaticResource NullOrEmptyListToIsVisibleConverter}, Mode=OneWay}"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   Margin="12"
+                   FontAttributes="Italic"/>
+            
+        </Grid>
     </ContentPage.Content>
 
 </ContentPage>
