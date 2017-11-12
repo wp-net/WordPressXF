@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:WordPressXF.Converters;assembly=WordPressXF"
+             x:Class="WordPressXF.Views.NewsDetailPage"
+             Title="Post">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:HtmlWebviewConverter x:Key="HtmlWebviewConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+       <WebView Source="{Binding SelectedPost, Converter={StaticResource HtmlWebviewConverter}}"
+                Navigating="WebViewOnNavigating"
+                Margin="10" />
+    </ContentPage.Content>
+</ContentPage>

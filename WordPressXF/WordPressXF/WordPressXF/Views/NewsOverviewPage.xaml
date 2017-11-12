@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:converters="clr-namespace:WordPressXF.Converters;assembly=WordPressXF"
+             xmlns:controls="clr-namespace:WordPressXF.Controls;assembly=WordPressXF"
+             xmlns:behaviors="clr-namespace:WordPressXF.Behaviors;assembly=WordPressXF"
+             x:Class="WordPressXF.Views.NewsOverviewPage"
+             Title="News">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FeaturedImageConverter x:Key="FeaturedImageConverter"/>
+            <converters:HtmlConverter x:Key="HtmlConverter"/>
+            <converters:ImageResourceConverter x:Key="ImageResourceConverter"/>
+            <converters:SelectedItemConverter x:Key="SelectedItemConverter"/>
+
+            <x:String x:Key="PlaceholderImage">WordPressXF.Assets.placeholder.jpg</x:String>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+
+            <controls:IncrementalListView ItemsSource="{Binding Posts}"
+                                      HasUnevenRows="True"
+                                      IsPullToRefreshEnabled="True"                  
+                                      RefreshCommand="{Binding LoadPostsCommand}"
+                                      IsRefreshing="{Binding IsLoading, Mode=OneWay}">
+                <controls:IncrementalListView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="ItemSelected" Command="{Binding SelectPostCommand}" Converter="{StaticResource SelectedItemConverter}" />
+                </controls:IncrementalListView.Behaviors>
+                <controls:IncrementalListView.SeparatorColor>
+                    <OnPlatform x:TypeArguments="Color">
+                        <On Platform="iOS" Value="Transparent"/>
+                    </OnPlatform>
+                </controls:IncrementalListView.SeparatorColor>
+                <controls:IncrementalListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame BackgroundColor="White" Margin="10,5">
+                                <Grid Margin="6">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <forms:CachedImage HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                                   HeightRequest="200"         
+                                                   DownsampleToViewSize="true"
+                                                   Source = "{Binding Embedded, Converter={StaticResource FeaturedImageConverter}}"
+                                                   Aspect="AspectFill"
+                                                   LoadingPlaceholder="{Binding ., Source={StaticResource PlaceholderImage}, Converter={StaticResource ImageResourceConverter}}"
+                                                   FadeAnimationEnabled="True">
+                                    </forms:CachedImage>
+
+                                    <Label Text="{Binding Title.Rendered, Converter={StaticResource HtmlConverter}}"
+                                       FontSize="Medium" FontAttributes="Bold" Grid.Row="1" />
+
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </controls:IncrementalListView.ItemTemplate>
+            </controls:IncrementalListView>
+
+            <Label Text="Currently there are no posts to display. Please use 'Pull-To-Refresh' to get the latest news."
+                   IsVisible="{Binding ArePostsNotAvailable}"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   Margin="12"
+                   FontAttributes="Italic"/>
+
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>
