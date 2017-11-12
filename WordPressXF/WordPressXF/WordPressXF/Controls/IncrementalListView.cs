@@ -23,6 +23,12 @@ namespace WordPressXF.Controls
         public IncrementalListView()
         {
             ItemAppearing += OnItemAppearing;
+            ItemTapped += (s, e) =>
+            {
+                if (e.Item == null)
+                    return;
+                ((IncrementalListView)s).SelectedItem = null;
+            };
         }
 
         ~IncrementalListView()
@@ -50,7 +56,7 @@ namespace WordPressXF.Controls
                 return;
 
             _incrementalLoading = BindingContext as ISupportIncrementalLoading;
-            
+
             if (_incrementalLoading == null)
                 throw new NotSupportedException($"{nameof(IncrementalListView)} BindingContext does not implement {nameof(ISupportIncrementalLoading)}. This is required for incremental loading to work.");
         }
