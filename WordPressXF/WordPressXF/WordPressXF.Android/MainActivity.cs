@@ -20,7 +20,7 @@ namespace WordPressXF.Droid
 
             base.OnCreate(bundle);
 
-            CachedImageRenderer.Init();
+            CachedImageRenderer.Init(true);
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
         }

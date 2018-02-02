@@ -1,5 +1,7 @@
-﻿using Microsoft.Practices.ServiceLocation;
-using Microsoft.Practices.Unity;
+﻿using CommonServiceLocator;
+using Unity;
+using Unity.Lifetime;
+using Unity.ServiceLocation;
 using WordPressXF.Services;
 using WordPressXF.ViewModels;
 
