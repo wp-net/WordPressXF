@@ -79,6 +79,42 @@ namespace WordPressXF.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        internal static string LoginPageLoginButton {
+            get {
+                return ResourceManager.GetString("LoginPageLoginButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string LoginPagePasswordPlaceholder {
+            get {
+                return ResourceManager.GetString("LoginPagePasswordPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        internal static string LoginPageTitle {
+            get {
+                return ResourceManager.GetString("LoginPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username.
+        /// </summary>
+        internal static string LoginPageUsernamePlaceholder {
+            get {
+                return ResourceManager.GetString("LoginPageUsernamePlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Post.
         /// </summary>
         internal static string NewsDetailPageTitle {
@@ -93,6 +129,15 @@ namespace WordPressXF.Resources {
         internal static string NewsOverviewPageNoPostsLabel {
             get {
                 return ResourceManager.GetString("NewsOverviewPageNoPostsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string SettingsPageTitle {
+            get {
+                return ResourceManager.GetString("SettingsPageTitle", resourceCulture);
             }
         }
         

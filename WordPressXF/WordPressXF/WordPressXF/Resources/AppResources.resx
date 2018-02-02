@@ -123,11 +123,26 @@
   <data name="CommentPageTitle" xml:space="preserve">
     <value>Comments</value>
   </data>
+  <data name="LoginPageLoginButton" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginPagePasswordPlaceholder" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="LoginPageTitle" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginPageUsernamePlaceholder" xml:space="preserve">
+    <value>Username</value>
+  </data>
   <data name="NewsDetailPageTitle" xml:space="preserve">
     <value>Post</value>
   </data>
   <data name="NewsOverviewPageNoPostsLabel" xml:space="preserve">
     <value>Currently there are no posts to display. Please use 'Pull-To-Refresh' to get the latest news.</value>
+  </data>
+  <data name="SettingsPageTitle" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="SplashScreenLoadingLabel" xml:space="preserve">
     <value>Loading latest posts...</value>
