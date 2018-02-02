@@ -5,6 +5,7 @@
              xmlns:converters="clr-namespace:WordPressXF.Converters;assembly=WordPressXF"
              xmlns:controls="clr-namespace:WordPressXF.Controls;assembly=WordPressXF"
              xmlns:behaviors="clr-namespace:WordPressXF.Behaviors;assembly=WordPressXF"
+             xmlns:extensions="clr-namespace:WordPressXF.Extensions;assembly=WordPressXF"
              x:Class="WordPressXF.Views.NewsOverviewPage"
              Title="News">
 
@@ -63,7 +64,7 @@
                 </controls:IncrementalListView.ItemTemplate>
             </controls:IncrementalListView>
 
-            <Label Text="Currently there are no posts to display. Please use 'Pull-To-Refresh' to get the latest news."
+            <Label Text="{extensions:Translate NewsOverviewPageNoPostsLabel}"
                    IsVisible="{Binding ArePostsNotAvailable}"
                    VerticalTextAlignment="Center"
                    HorizontalTextAlignment="Center"
