@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -55,20 +57,31 @@ namespace WordPressXF.ViewModels
 
         private async Task LoadPostsAsync()
         {
-            IsLoading = true;
+            try
+            {
+                IsLoading = true;
 
-            _currentPage = 0;
+                _currentPage = 0;
 
-            Posts.Clear();
+                Posts.Clear();
 
-            var posts = (await _wordpressService.GetLatestPostsAsync(_currentPage, PageSize)).ToObservableCollection();
-            HasMoreItems = posts.Count == PageSize;
+                var posts = (await _wordpressService.GetLatestPostsAsync(_currentPage, PageSize)).ToObservableCollection();
+                HasMoreItems = posts.Count == PageSize;
 
-            Posts.AddRange(posts);
+                Posts.AddRange(posts);
 
-            ArePostsNotAvailable = !Posts.Any();
+                ArePostsNotAvailable = !Posts.Any();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"NewsViewModel | LoadPostsAsync | {ex}");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
 
-            IsLoading = false;
+
         }
 
         private ICommand _selectPostCommand;
@@ -139,17 +152,26 @@ namespace WordPressXF.ViewModels
 
         private async Task LoadMoreItemsAsync()
         {
-            IsLoadingIncrementally = true;
+            try
+            {
+                IsLoadingIncrementally = true;
 
-            _currentPage++;
+                _currentPage++;
 
-            var posts = (await _wordpressService.GetLatestPostsAsync(_currentPage, PageSize)).ToObservableCollection();
-            HasMoreItems = posts.Count == PageSize;
+                var posts = (await _wordpressService.GetLatestPostsAsync(_currentPage, PageSize)).ToObservableCollection();
+                HasMoreItems = posts.Count == PageSize;
 
-            Posts.AddRange(posts);
-            ArePostsNotAvailable = !Posts.Any();
-
-            IsLoadingIncrementally = false;
+                Posts.AddRange(posts);
+                ArePostsNotAvailable = !Posts.Any();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"NewsViewModel | LoadMoreItemsAsync | {ex}");
+            }
+            finally
+            {
+                IsLoadingIncrementally = false;
+            }
         }
 
         #endregion
