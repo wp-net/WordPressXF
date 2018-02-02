@@ -8,6 +8,7 @@ It's built on
 working and planned features for WordPressXF:
 - [x] Show posts
 - [x] Show comments
+- [x] Use SplashScreen
 - [ ] Settings page
 - [ ] Sign In
 - [ ] Add comment
