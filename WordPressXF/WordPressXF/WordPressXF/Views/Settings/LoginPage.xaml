@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:extensions="clr-namespace:WordPressXF.Extensions;assembly=WordPressXF"
+             x:Class="WordPressXF.Views.Settings.LoginPage"
+             Title="{extensions:Translate LoginPageTitle}"
+             Padding="12">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="{extensions:Translate LoginPageUsernamePlaceholder}"
+                   Text="{Binding UserName}"/>
+            <Entry Placeholder="{extensions:Translate LoginPagePasswordPlaceholder}"
+                   Text="{Binding Password}"
+                   IsPassword="True"/>
+            <Button Text="{extensions:Translate LoginPageLoginButton}"
+                    Command="{Binding LoginCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>
