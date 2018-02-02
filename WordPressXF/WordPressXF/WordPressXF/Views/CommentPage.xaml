@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:WordPressXF.Converters;assembly=WordPressXF"
+             xmlns:extensions="clr-namespace:WordPressXF.Extensions;assembly=WordPressXF"
              x:Class="WordPressXF.Views.CommentPage"
-             Title="Comments">
+             Title="{extensions:Translate CommentPageTitle}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -44,7 +45,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Label Text="Currently there are no comments for this post."
+            <Label Text="{extensions:Translate CommentPageNoCommentsLabel}"
                    IsVisible="{Binding Comments, Converter={StaticResource NullOrEmptyListToIsVisibleConverter}}"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"

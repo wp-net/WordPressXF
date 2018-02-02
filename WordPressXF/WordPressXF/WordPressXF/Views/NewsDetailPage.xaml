@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:WordPressXF.Converters;assembly=WordPressXF"
+             xmlns:extensions="clr-namespace:WordPressXF.Extensions;assembly=WordPressXF"
              x:Class="WordPressXF.Views.NewsDetailPage"
-             Title="Post">
+             Title="{extensions:Translate NewsDetailPageTitle}">
 
     <ContentPage.Resources>
         <ResourceDictionary>

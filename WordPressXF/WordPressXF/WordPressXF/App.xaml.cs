@@ -1,6 +1,4 @@
-﻿using Microsoft.Practices.ServiceLocation;
-using WordPressXF.Init;
-using WordPressXF.ViewModels;
+﻿using WordPressXF.Init;
 using WordPressXF.Views;
 using Xamarin.Forms;
 
@@ -14,10 +12,7 @@ namespace WordPressXF
 
             Bootstrapper.RegisterDependencies();
 
-            MainPage = new NavigationPage(new NewsOverviewPage
-            {
-                BindingContext = ServiceLocator.Current.GetInstance<NewsViewModel>()
-            });
+            MainPage = new SplashScreen();
         }
 
         protected override void OnStart()
