@@ -21,12 +21,11 @@
 
     <ContentPage.Content>
         <Grid>
-
             <controls:IncrementalListView ItemsSource="{Binding Posts}"
-                                      HasUnevenRows="True"
-                                      IsPullToRefreshEnabled="True"                  
-                                      RefreshCommand="{Binding LoadPostsCommand}"
-                                      IsRefreshing="{Binding IsLoading, Mode=OneWay}">
+                                          HasUnevenRows="True"
+                                          IsPullToRefreshEnabled="True"                  
+                                          RefreshCommand="{Binding LoadPostsAsyncCommand}"
+                                          IsRefreshing="{Binding IsLoading, Mode=OneWay}">
                 <controls:IncrementalListView.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="ItemSelected" Command="{Binding SelectPostCommand}" Converter="{StaticResource SelectedItemConverter}" />
                 </controls:IncrementalListView.Behaviors>

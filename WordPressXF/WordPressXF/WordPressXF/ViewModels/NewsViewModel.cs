@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WordPressPCL.Models;
+using WordPressXF.Common;
 using WordPressXF.ExtensionMethods;
 using WordPressXF.Interfaces;
 using WordPressXF.Services;
@@ -49,8 +50,8 @@ namespace WordPressXF.ViewModels
         }
 
 
-        private ICommand _loadPostsCommand;
-        public ICommand LoadPostsCommand => _loadPostsCommand ?? (_loadPostsCommand = new Command(async () => await LoadPostsAsync()));
+        private AsyncRelayCommand _loadPostsAsyncCommand;
+        public AsyncRelayCommand LoadPostsAsyncCommand => _loadPostsAsyncCommand ?? (_loadPostsAsyncCommand = new AsyncRelayCommand(LoadPostsAsync));
 
         private async Task LoadPostsAsync()
         {
