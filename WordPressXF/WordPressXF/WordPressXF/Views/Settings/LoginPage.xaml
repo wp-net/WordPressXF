@@ -2,20 +2,40 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:extensions="clr-namespace:WordPressXF.Extensions;assembly=WordPressXF"
+             xmlns:converters="clr-namespace:WordPressXF.Converters"
              x:Class="WordPressXF.Views.Settings.LoginPage"
              Title="{extensions:Translate LoginPageTitle}"
              Padding="12">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CurrentUserToIsVisibleConverter x:Key="CurrentUserToIsVisibleConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Entry Placeholder="{extensions:Translate LoginPageUsernamePlaceholder}"
-                   Text="{Binding UserName}"/>
-            <Entry Placeholder="{extensions:Translate LoginPagePasswordPlaceholder}"
-                   Text="{Binding Password}"
-                   IsPassword="True"/>
-            <Button Text="{extensions:Translate LoginPageLoginButton}"
-                    Command="{Binding LoginCommand}"/>
-        </StackLayout>
+        <Grid>
+            <StackLayout x:Name="LoginLayout"
+                         IsVisible="{Binding CurrentUser, Converter={StaticResource CurrentUserToIsVisibleConverter}}">
+                <Entry Placeholder="{extensions:Translate LoginPageUsernamePlaceholder}"
+                       Text="{Binding UserName}" />
+                <Entry Placeholder="{extensions:Translate LoginPagePasswordPlaceholder}"
+                       Text="{Binding Password}"
+                       IsPassword="True" />
+                <Button Text="{extensions:Translate LoginPageLoginButton}"
+                        Command="{Binding LoginCommand}" />
+            </StackLayout>
+            <StackLayout x:Name="LoggedInLayout"
+                         IsVisible="{Binding CurrentUser, Converter={StaticResource CurrentUserToIsVisibleConverter}, ConverterParameter=reverse}">
+                <StackLayout Orientation="Horizontal"
+                             Spacing="6">
+                    <Label Text="{extensions:Translate LoginPageCurrentUserLabel}" />
+                    <Label Text="{Binding CurrentUser.Name}" />
+                </StackLayout>
+                <Button Text="{extensions:Translate LoginPageLogoutButton}"
+                        Command="{Binding LogoutCommand}" />
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 
 </ContentPage>
