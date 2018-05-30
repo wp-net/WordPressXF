@@ -10,7 +10,7 @@ working and planned features for WordPressXF:
 - [x] Show comments
 - [x] Use SplashScreen
 - [ ] Settings page
-- [ ] Sign In
+- [x] Sign In
 - [ ] Add comment
 
 # Quickstart
