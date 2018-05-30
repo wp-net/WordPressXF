@@ -1,5 +1,6 @@
 ﻿using CommonServiceLocator;
 using WordPressXF.ViewModels;
+using WordPressXF.Views.AppShell;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,9 +22,12 @@ namespace WordPressXF.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            
+         
+            // try to autologin
+            await ServiceLocator.Current.GetInstance<SettingsViewModel>().TryAutoLoginCommand.ExecuteAsync();
+
             await _viewModel.LoadPostsAsyncCommand.ExecuteAsync();
-            Application.Current.MainPage = new NavigationPage(new NewsOverviewPage { BindingContext = _viewModel });
+            Application.Current.MainPage = new AppShellPage();
         }
     }
 }

@@ -4,6 +4,7 @@ using WordPressPCL;
 using WordPressPCL.Models;
 using WordPressPCL.Utility;
 using WordPressXF.Utils;
+using Xamarin.Auth;
 
 namespace WordPressXF.Services
 {
@@ -40,6 +41,24 @@ namespace WordPressXF.Services
             });
             
             return ThreadedCommentsHelper.GetThreadedComments(comments);
+        }
+
+        public async Task<User> LoginAsync(string username, string password)
+        {
+            _client.AuthMethod = AuthMethod.JWT;
+            await _client.RequestJWToken(username, password);
+
+            var isAuthenticated = await _client.IsValidJWToken();
+
+            if (isAuthenticated)
+                return await _client.Users.GetCurrentUser();
+
+            return null;
+        }
+
+        public void Logout()
+        {
+            _client.Logout();
         }
     }
 }

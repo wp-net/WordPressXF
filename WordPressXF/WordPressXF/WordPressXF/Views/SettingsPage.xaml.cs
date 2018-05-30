@@ -6,13 +6,13 @@ using Xamarin.Forms.Xaml;
 namespace WordPressXF.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NewsOverviewPage : ContentPage
+    public partial class SettingsPage : TabbedPage
     {
-        public NewsOverviewPage()
+        public SettingsPage()
         {
             InitializeComponent();
 
-            BindingContext = ServiceLocator.Current.GetInstance<NewsViewModel>();
+            BindingContext = ServiceLocator.Current.GetInstance<SettingsViewModel>();
         }
     }
 }

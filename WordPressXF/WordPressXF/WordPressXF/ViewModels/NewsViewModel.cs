@@ -100,7 +100,7 @@ namespace WordPressXF.ViewModels
             Comments = null;
             SelectedPost = post;
             GetComments(post.Id);
-            Application.Current.MainPage.Navigation.PushAsync(GetTabbedPage());
+            ((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.PushAsync(GetTabbedPage());
         }
 
         private async void GetComments(int postId)

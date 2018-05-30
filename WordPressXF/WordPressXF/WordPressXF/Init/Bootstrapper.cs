@@ -18,6 +18,7 @@ namespace WordPressXF.Init
 
             // viewmodel
             container.RegisterType<NewsViewModel>(new ContainerControlledLifetimeManager());
+            container.RegisterType<SettingsViewModel>(new ContainerControlledLifetimeManager());
 
             var locator = new UnityServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => locator);

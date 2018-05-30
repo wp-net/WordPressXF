@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:extensions="clr-namespace:WordPressXF.Extensions;assembly=WordPressXF"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="WordPressXF.Views.AppShell.AppShellMaster"
+             Title="Master">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <x:String x:Key="MenuHeaderImage">WordPressXF.Assets.menuheader.png</x:String>
+
+            <DataTemplate x:Key="AppShellMenuItemDataTemplate">
+                <ViewCell>
+                    <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding Title}"
+                               TextColor="Black"
+                               VerticalOptions="FillAndExpand" 
+                               VerticalTextAlignment="Center" 
+                               FontSize="Medium" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout VerticalOptions="StartAndExpand"
+                 HorizontalOptions="StartAndExpand"
+                 BackgroundColor="LightGray">
+
+        <Grid BackgroundColor="DarkBlue"
+              HeightRequest="150">
+
+            <forms:CachedImage HorizontalOptions="FillAndExpand"
+                               VerticalOptions="FillAndExpand"
+                               Aspect="AspectFit"
+                               Margin="20"
+                               Source="{Binding Source={StaticResource MenuHeaderImage}, Converter={StaticResource ImageSourceConverter}}"
+                               FadeAnimationForCachedImages="True"
+                               DownsampleToViewSize="True"
+                               Grid.Row="0"/>
+
+        </Grid>
+
+        <ListView x:Name="Primary" 
+                  SeparatorVisibility="None"
+                  HasUnevenRows="true"
+                  RowHeight="48"
+                  ItemsSource="{Binding PrimaryMenuItems}"
+                  ItemTemplate="{StaticResource AppShellMenuItemDataTemplate}"/>
+
+        <ListView x:Name="Secondary" 
+                  SeparatorVisibility="None"
+                  HasUnevenRows="true"
+                  RowHeight="48"
+                  ItemsSource="{Binding SecondaryMenuItems}"
+                  ItemTemplate="{StaticResource AppShellMenuItemDataTemplate}"
+                  HeightRequest="100"
+                  VerticalOptions="End"/>
+
+    </StackLayout>
+
+</ContentPage>
