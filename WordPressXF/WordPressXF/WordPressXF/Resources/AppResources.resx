@@ -123,8 +123,14 @@
   <data name="CommentPageTitle" xml:space="preserve">
     <value>Comments</value>
   </data>
+  <data name="LoginPageCurrentUserLabel" xml:space="preserve">
+    <value>Current User:</value>
+  </data>
   <data name="LoginPageLoginButton" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="LoginPageLogoutButton" xml:space="preserve">
+    <value>Logout</value>
   </data>
   <data name="LoginPagePasswordPlaceholder" xml:space="preserve">
     <value>Password</value>
