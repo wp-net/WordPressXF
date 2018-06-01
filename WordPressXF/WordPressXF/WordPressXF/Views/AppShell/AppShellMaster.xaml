@@ -4,6 +4,7 @@
              xmlns:extensions="clr-namespace:WordPressXF.Extensions;assembly=WordPressXF"
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="WordPressXF.Views.AppShell.AppShellMaster"
+             BackgroundColor="LightGray"
              Title="Master">
 
     <ContentPage.Resources>
@@ -28,8 +29,17 @@
                  HorizontalOptions="StartAndExpand"
                  BackgroundColor="LightGray">
 
-        <Grid BackgroundColor="DarkBlue"
-              HeightRequest="150">
+        <Grid BackgroundColor="DarkBlue">
+            <Grid.HeightRequest>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="iOS"
+                        Value="150" />
+                    <On Platform="Android"
+                        Value="150" />
+                    <On Platform="UWP"
+                        Value="300" />
+                </OnPlatform>
+            </Grid.HeightRequest>
 
             <forms:CachedImage HorizontalOptions="FillAndExpand"
                                VerticalOptions="FillAndExpand"
@@ -38,24 +48,26 @@
                                Source="{Binding Source={StaticResource MenuHeaderImage}, Converter={StaticResource ImageSourceConverter}}"
                                FadeAnimationForCachedImages="True"
                                DownsampleToViewSize="True"
-                               Grid.Row="0"/>
-
+                               Grid.Row="0" />
         </Grid>
 
-        <ListView x:Name="Primary" 
+        <ListView x:Name="Primary"
+                  BackgroundColor="LightGray"
                   SeparatorVisibility="None"
                   HasUnevenRows="true"
                   RowHeight="48"
                   ItemsSource="{Binding PrimaryMenuItems}"
                   ItemTemplate="{StaticResource AppShellMenuItemDataTemplate}"/>
 
-        <ListView x:Name="Secondary" 
+        <ListView x:Name="Secondary"
+                  BackgroundColor="LightGray"
                   SeparatorVisibility="None"
                   HasUnevenRows="true"
                   RowHeight="48"
                   ItemsSource="{Binding SecondaryMenuItems}"
                   ItemTemplate="{StaticResource AppShellMenuItemDataTemplate}"
                   HeightRequest="100"
+                  Margin="0,52,0,0"
                   VerticalOptions="End"/>
 
     </StackLayout>

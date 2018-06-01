@@ -30,10 +30,13 @@ namespace WordPressXF.Views.AppShell
             if (item.TargetType == null)
                 return;
 
-            if (((NavigationPage)Detail).InternalChildren != null && ((NavigationPage)Detail).InternalChildren.Count > 0 && ((NavigationPage)Detail).InternalChildren[0].GetType() == item.TargetType)
+            if (Device.RuntimePlatform == Device.Android || Device.RuntimePlatform == Device.iOS)
             {
-                IsPresented = false;
-                return;
+                if (((NavigationPage)Detail).InternalChildren != null && ((NavigationPage)Detail).InternalChildren.Count > 0 && ((NavigationPage)Detail).InternalChildren[0].GetType() == item.TargetType)
+                {
+                    IsPresented = false;
+                    return;
+                }
             }
 
             var page = (Page)Activator.CreateInstance(item.TargetType);
