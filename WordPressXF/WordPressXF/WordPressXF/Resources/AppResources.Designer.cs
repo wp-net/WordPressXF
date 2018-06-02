@@ -61,6 +61,42 @@ namespace WordPressXF.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have to login first to be able to post a comment..
+        /// </summary>
+        internal static string CommentDialogNotAuthorizedMessage {
+            get {
+                return ResourceManager.GetString("CommentDialogNotAuthorizedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string CommentDialogNotAuthorizedTitle {
+            get {
+                return ResourceManager.GetString("CommentDialogNotAuthorizedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        internal static string CommentPageCommentButton {
+            get {
+                return ResourceManager.GetString("CommentPageCommentButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Comment....
+        /// </summary>
+        internal static string CommentPageCommentLabelPlaceholder {
+            get {
+                return ResourceManager.GetString("CommentPageCommentLabelPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Currently there are no comments for this post..
         /// </summary>
         internal static string CommentPageNoCommentsLabel {
@@ -79,11 +115,38 @@ namespace WordPressXF.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        internal static string DialogOk {
+            get {
+                return ResourceManager.GetString("DialogOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current User:.
+        /// </summary>
+        internal static string LoginPageCurrentUserLabel {
+            get {
+                return ResourceManager.GetString("LoginPageCurrentUserLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         internal static string LoginPageLoginButton {
             get {
                 return ResourceManager.GetString("LoginPageLoginButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        internal static string LoginPageLogoutButton {
+            get {
+                return ResourceManager.GetString("LoginPageLogoutButton", resourceCulture);
             }
         }
         
