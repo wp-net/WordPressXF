@@ -30,15 +30,6 @@ namespace WordPressXF.Views.AppShell
             if (item.TargetType == null)
                 return;
 
-            if (Device.RuntimePlatform == Device.Android || Device.RuntimePlatform == Device.iOS)
-            {
-                if (((NavigationPage)Detail).InternalChildren != null && ((NavigationPage)Detail).InternalChildren.Count > 0 && ((NavigationPage)Detail).InternalChildren[0].GetType() == item.TargetType)
-                {
-                    IsPresented = false;
-                    return;
-                }
-            }
-
             var page = (Page)Activator.CreateInstance(item.TargetType);
             var navigationPage = new NavigationPage(page);
             NavigationPage.SetHasNavigationBar(navigationPage, false);
