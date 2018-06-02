@@ -23,6 +23,7 @@
     <ContentPage.Content>
         <Grid>
             <controls:IncrementalListView ItemsSource="{Binding Posts}"
+                                          SeparatorVisibility="None"
                                           HasUnevenRows="True"
                                           IsPullToRefreshEnabled="True"                  
                                           RefreshCommand="{Binding LoadPostsAsyncCommand}"
@@ -30,11 +31,6 @@
                 <controls:IncrementalListView.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="ItemSelected" Command="{Binding SelectPostCommand}" Converter="{StaticResource SelectedItemConverter}" />
                 </controls:IncrementalListView.Behaviors>
-                <controls:IncrementalListView.SeparatorColor>
-                    <OnPlatform x:TypeArguments="Color">
-                        <On Platform="iOS" Value="Transparent"/>
-                    </OnPlatform>
-                </controls:IncrementalListView.SeparatorColor>
                 <controls:IncrementalListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

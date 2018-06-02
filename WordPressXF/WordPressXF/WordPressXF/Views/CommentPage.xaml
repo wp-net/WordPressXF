@@ -21,15 +21,10 @@
 
             <Grid Grid.Row="0">
                 <ListView x:Name="CommentListView"
+                          SeparatorVisibility="None"
                           ItemsSource="{Binding Comments}"
                           HasUnevenRows="True"
                           IsPullToRefreshEnabled="False">
-                    <ListView.SeparatorColor>
-                        <OnPlatform x:TypeArguments="Color">
-                            <On Platform="iOS"
-                                Value="Transparent" />
-                        </OnPlatform>
-                    </ListView.SeparatorColor>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
