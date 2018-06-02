@@ -81,7 +81,7 @@ namespace WordPressXF.ViewModels
         {
             try
             {
-                IsLoading = true;
+                IsRefreshing = true;
 
                 _currentPage = 0;
 
@@ -100,7 +100,7 @@ namespace WordPressXF.ViewModels
             }
             finally
             {
-                IsLoading = false;
+                IsRefreshing = false;
             }
         }
 
