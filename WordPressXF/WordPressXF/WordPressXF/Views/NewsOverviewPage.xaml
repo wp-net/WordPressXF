@@ -27,7 +27,7 @@
                                           HasUnevenRows="True"
                                           IsPullToRefreshEnabled="True"                  
                                           RefreshCommand="{Binding LoadPostsAsyncCommand}"
-                                          IsRefreshing="{Binding IsLoading, Mode=OneWay}">
+                                          IsRefreshing="{Binding IsRefreshing, Mode=OneWay}">
                 <controls:IncrementalListView.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="ItemSelected" Command="{Binding SelectPostCommand}" Converter="{StaticResource SelectedItemConverter}" />
                 </controls:IncrementalListView.Behaviors>
