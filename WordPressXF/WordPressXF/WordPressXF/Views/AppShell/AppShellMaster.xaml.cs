@@ -13,6 +13,9 @@ namespace WordPressXF.Views.AppShell
         {
             InitializeComponent();
 
+            if (Device.RuntimePlatform == Device.iOS)
+                Icon = "hamburger.png";
+
             BindingContext = new AppShellMasterViewModel();
 
             PrimaryListView = Primary;

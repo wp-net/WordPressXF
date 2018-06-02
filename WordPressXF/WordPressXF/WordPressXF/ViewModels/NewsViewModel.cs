@@ -10,6 +10,7 @@ using WordPressPCL.Models;
 using WordPressXF.Common;
 using WordPressXF.ExtensionMethods;
 using WordPressXF.Interfaces;
+using WordPressXF.Resources;
 using WordPressXF.Services;
 using WordPressXF.Utils;
 using WordPressXF.Views;
@@ -44,6 +45,20 @@ namespace WordPressXF.ViewModels
             set { _comments = value; OnPropertyChanged(); }
         }
 
+        private string _commentText;
+        public string CommentText
+        {
+            get => _commentText;
+            set { _commentText = value; OnPropertyChanged(); PostCommentAsyncCommand.RaiseCanExecuteChange(); }
+        }
+
+        private bool _isCommenting = false;
+        public bool IsCommenting
+        {
+            get => _isCommenting;
+            set { _isCommenting = value; OnPropertyChanged(); PostCommentAsyncCommand.RaiseCanExecuteChange(); }
+        }
+
         private bool _arePostsNotAvailable = true;
         public bool ArePostsNotAvailable
         {
@@ -51,9 +66,16 @@ namespace WordPressXF.ViewModels
             set { _arePostsNotAvailable = value; OnPropertyChanged(); }
         }
 
-
         private AsyncRelayCommand _loadPostsAsyncCommand;
         public AsyncRelayCommand LoadPostsAsyncCommand => _loadPostsAsyncCommand ?? (_loadPostsAsyncCommand = new AsyncRelayCommand(LoadPostsAsync));
+
+        private AsyncRelayCommand _postCommentAsyncCommand;
+        public AsyncRelayCommand PostCommentAsyncCommand => _postCommentAsyncCommand ?? (_postCommentAsyncCommand = new AsyncRelayCommand(PostCommentAsync, CanPostComment));
+
+        private bool CanPostComment()
+        {
+            return (!string.IsNullOrEmpty(CommentText) && !IsCommenting);
+        }
 
         private async Task LoadPostsAsync()
         {
@@ -80,8 +102,32 @@ namespace WordPressXF.ViewModels
             {
                 IsLoading = false;
             }
+        }
 
+        private async Task PostCommentAsync()
+        {
+            try
+            {
+                IsCommenting = true;
 
+                if (await _wordpressService.IsUserAuthenticatedAsync())
+                {
+                    var comment = await _wordpressService.PostCommentAsync(SelectedPost.Id, CommentText);
+                    if (comment != null)
+                    {
+                        CommentText = null;
+                        await GetCommentsAsync(SelectedPost.Id);
+                    }
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert(AppResources.CommentDialogNotAuthorizedTitle, AppResources.CommentDialogNotAuthorizedMessage, AppResources.DialogOk);
+                }
+            }
+            finally
+            {
+                IsCommenting = false;
+            }
         }
 
         private ICommand _selectPostCommand;
@@ -92,18 +138,20 @@ namespace WordPressXF.ViewModels
             _wordpressService = wordpressService;
         }
 
-        private void SelectPost(Post post)
+        private async void SelectPost(Post post)
         {
             if (post == null)
                 return;
 
             Comments = null;
+            CommentText = null;
             SelectedPost = post;
-            GetComments(post.Id);
-            ((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.PushAsync(GetTabbedPage());
+
+            await GetCommentsAsync(post.Id);
+            await ((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.PushAsync(GetTabbedPage());
         }
 
-        private async void GetComments(int postId)
+        private async Task GetCommentsAsync(int postId)
         {
             IsLoading = true;
 

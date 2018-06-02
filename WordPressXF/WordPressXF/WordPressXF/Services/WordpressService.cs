@@ -60,5 +60,19 @@ namespace WordPressXF.Services
         {
             _client.Logout();
         }
+
+        public async Task<bool> IsUserAuthenticatedAsync()
+        {
+            return await _client.IsValidJWToken();
+        }
+
+        public async Task<Comment> PostCommentAsync(int postId, string text, int replyTo = 0)
+        {
+            var comment = new Comment(postId, text);
+            if (replyTo != 0)
+                comment.ParentId = replyTo;
+
+            return await _client.Comments.Create(comment);
+        }
     }
 }
