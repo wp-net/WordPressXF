@@ -1,5 +1,5 @@
 # WordPressXF
-This is a Xamarin.Forms app (supporting Android and iOS) framework designed to turn WordPress Blogs / Sites into nice little apps.
+This is a Xamarin.Forms app/framework (supporting Android, iOS and UWP) designed to turn easily WordPress Blogs / Sites into nice little apps.
 
 It's built on
 * [WordPressPCL (WordPress REST API Wrapper)](https://github.com/ThomasPe/WordPressPCL)
@@ -11,7 +11,7 @@ working and planned features for WordPressXF:
 - [x] Use SplashScreen
 - [ ] Settings page
 - [x] Sign In
-- [ ] Add comment
+- [x] Add comment
 
 # Quickstart
 
