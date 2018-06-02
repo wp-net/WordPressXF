@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:WordPressXF.Converters;assembly=WordPressXF"
              xmlns:extensions="clr-namespace:WordPressXF.Extensions;assembly=WordPressXF"
+             xmlns:controls="clr-namespace:WordPressXF.Controls"
              x:Class="WordPressXF.Views.NewsDetailPage"
              Title="{extensions:Translate NewsDetailPageTitle}">
 
@@ -13,8 +14,7 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-       <WebView Source="{Binding SelectedPost, Converter={StaticResource HtmlWebviewConverter}}"
-                Navigating="WebViewOnNavigating"
-                Margin="10" />
+        <controls:ExternalWebView Source="{Binding SelectedPost, Converter={StaticResource HtmlWebviewConverter}}"
+                                  Margin="10" />
     </ContentPage.Content>
 </ContentPage>

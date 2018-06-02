@@ -12,6 +12,13 @@ namespace WordPressXF.ViewModels
             set { _isLoading = value; OnPropertyChanged(); }
         }
 
+        private bool _isRefreshing;
+        public bool IsRefreshing
+        {
+            get => _isRefreshing;
+            set { _isRefreshing = value; OnPropertyChanged(); }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
