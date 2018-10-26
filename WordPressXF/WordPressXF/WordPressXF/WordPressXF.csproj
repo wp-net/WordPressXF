@@ -16,12 +16,12 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Unity" Version="5.8.6" />
-    <PackageReference Include="WordPressPCL" Version="1.4.2" />
+    <PackageReference Include="Unity" Version="5.8.11" />
+    <PackageReference Include="WordPressPCL" Version="1.5.0" />
     <PackageReference Include="Xamarin.Auth" Version="1.6.0.2" />
     <PackageReference Include="Xamarin.Essentials" Version="0.6.0-preview" />
-    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.1.823" />
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.3.840" />
+    <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
   </ItemGroup>
 
   <ItemGroup>
