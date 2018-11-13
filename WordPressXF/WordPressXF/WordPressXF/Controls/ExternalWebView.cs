@@ -26,7 +26,7 @@ namespace WordPressXF.Controls
 
             e.Cancel = true;
 
-            await Browser.OpenAsync(e.Url, BrowserLaunchType.External);
+            await Browser.OpenAsync(e.Url, BrowserLaunchMode.External);
         }
     }
 }
